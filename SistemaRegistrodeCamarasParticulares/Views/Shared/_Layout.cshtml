@@ -1,49 +1,254 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SistemaRegistrodeCamarasParticulares</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SistemaRegistrodeCamarasParticulares.styles.css" asp-append-version="true" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewData["Title"] - Sistema Chips Repuve</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+          name="viewport" />
+    <link rel="icon"
+          href="~/img/logos/LOGO-SSPE.png"
+          type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="~/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+          google: { families: ["Public Sans:300,400,500,600,700"] },
+          custom: {
+            families: [
+              "Font Awesome 5 Solid",
+              "Font Awesome 5 Regular",
+              "Font Awesome 5 Brands",
+              "simple-line-icons",
+            ],
+            urls: ["/css/fonts.min.css"],
+          },
+          active: function () {
+            sessionStorage.fonts = true;
+          },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/css/kaiadmin.min.css" />
+    <style>
+        .nav-collapse .sub-item {
+            color: white !important;
+        }
+
+        .profile-username{
+            color: white !important;
+        }
+    </style>
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SistemaRegistrodeCamarasParticulares</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" style="background-color:#611232">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" style="background-color:#611232">
+                    <a href="@Url.Action("Index", "Home")" class="logo d-flex align-items-center">
+                        <img src="~/img/logos/LOGO-SSPE.png"
+                             alt="navbar brand"
+                             class="navbar-brand me-2"
+                             height="65" />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-collapse">
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h5 class="text-section" style="color: #a57f2c">Sistema Estatal de Video Vigilancia para Particulares</h5>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="mt-4">
+                            <a href="@Url.Action("Index", "Home")">
+                                <span class="sub-item">Home</span>
+                            </a>
                         </li>
+                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Administrador"))
+                        {
+                            <li class="mt-4">
+                                <a href="@Url.Action("Index", "")">
+                                    <span class="sub-item">Cajas</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - SistemaRegistrodeCamarasParticulares - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header" style="background-color: #611232">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" style="background-color: #611232">
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
+                </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item topbar-user dropdown hidden-caret">
+                                    <a class="dropdown-toggle profile-pic"
+                                       data-bs-toggle="dropdown"
+                                       href="#"
+                                       aria-expanded="false">
+                                        <div class="avatar-sm">
+                                            <img src="~/img/user.png"
+                                                 alt="..."
+                                                 class="avatar-img rounded-circle" />
+                                        </div>
+                                        <span class="profile-username">
+                                            <span class="op-7">Hola,</span>
+                                            <span class="fw-bold"> @User.Identity.Name</span>
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                        <div class="dropdown-user-scroll scrollbar-outer">
+                                            <li>
+                                                <div class="user-box">
+                                                    <div class="avatar-lg">
+                                                        <img src="~/img/user.png"
+                                                             alt="image profile"
+                                                             class="avatar-img rounded" />
+                                                    </div>
+                                                    <div class="u-text">
+                                                        <h4>@User.Identity.Name</h4>
+                                                        <p class="text-muted">@User.FindFirst("Correo")?.Value</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" asp-controller="Home" asp-action="GenerarExcel">Generar Reporte de Usuario</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            <!-- End Navbar -->
+        </div>
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    @* <h4 class="page-title">@ViewData["Title"]</h4> *@
+                </div>
+                <div class="page-category">
+                    @if (TempData["success"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>¡Éxito!</strong> @TempData["success"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (TempData["error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>¡Error!</strong> @TempData["error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid d-flex justify-content-between">
+                <nav class="pull-left">
+                </nav>
+                <div class="copyright">
+                    2025, Sistema de Arcos
+                    <a href="https://sspbcs.gob.mx/ssp/direccion-del-registro-publico-vehicular/">REPUVE</a>
+                </div>
+                <div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="~/js/core/jquery-3.7.1.min.js"></script>
+    <script src="~/js/core/popper.min.js"></script>
+    <script src="~/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="~/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="~/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="~/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="~/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="~/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="~/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="~/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="~/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Google Maps Plugin -->
+    <script src="~/js/plugin/gmaps/gmaps.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="~/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="~/js/kaiadmin.min.js"></script>
+
+    <!-- sweetAlerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
