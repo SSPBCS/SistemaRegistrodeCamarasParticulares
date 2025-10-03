@@ -83,7 +83,7 @@
                             <h5 class="text-section" style="color: #a57f2c">Sistema Estatal de Video Vigilancia para Particulares</h5>
                         </li>
                         <li class="mt-4">
-                            <a href="@Url.Action("Index", "Home")">
+                            <a href="@Url.Action("Index", "Casa")">
                                 <span class="sub-item">Home</span>
                             </a>
                         </li>
@@ -126,6 +126,7 @@
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             @if (User.Identity.IsAuthenticated)
                             {
+                            }
                                 <li class="nav-item topbar-user dropdown hidden-caret">
                                     <a class="dropdown-toggle profile-pic"
                                        data-bs-toggle="dropdown"
@@ -158,14 +159,13 @@
                                             </li>
                                             <li>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" asp-controller="Home" asp-action="GenerarExcel">Generar Reporte de Usuario</a>
-                                                <div class="dropdown-divider"></div>
+                                                @* <a class="dropdown-item" asp-controller="Home" asp-action="GenerarExcel">Generar Reporte de Usuario</a> *@
+                                                @* <div class="dropdown-divider"></div> *@
                                                 <a class="dropdown-item" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
                                             </li>
                                         </div>
                                     </ul>
                                 </li>
-                            }
                         </ul>
                     </div>
                 </nav>

@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using SistemaRegistrodeCamarasParticulares.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<DbRegistroCamarasParticularesContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbRegistroCamarasParticulares") ?? throw new InvalidOperationException("Connection string 'DbRegistroCamarasParticulares' not found.")));
 
 var app = builder.Build();
 
