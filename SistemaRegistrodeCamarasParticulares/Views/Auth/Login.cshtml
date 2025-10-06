@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <link href="~/login/styles.css" rel="stylesheet" />
+    <link rel="icon" href="~/img/logos/LOGO-SSPE.png" />
+    <link href="~/login/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="particles-js" style="position: absolute; width: 100%; height: 100% "></div>
+
+    <div class="account-pages mt-5 mb-5" style="position: absolute; width: 100%; height: 90% ">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5 col-lg-5 col-xl-5">
+                    <div class="card">
+                        <div class="card-header" style="background-color: #994059; min-height: 200px">
+                            <div class="text-center w-75 m-auto">
+                                <div class="d-flex flex-column align-items-center justify-content-center mt-5">
+                                    <a href="#" class="logo logo-dark text-center">
+                                        <img class="img-fluid" src="~/img/logos/LOGO-SSPE.png" />
+                                        <span class="logo-lg">
+                                        </span>
+                                    </a>
+                                    <h6 class="mt-4" style="color:white"><B>Sistema Estatal de Video Vigilancia para Particulares</B></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-4 bg-light">
+                            <form asp-controller="Auth" asp-action="Login" method="POST">
+                                @Html.AntiForgeryToken()
+                                <div class="container">
+                                    <div class="mb-2">
+                                        <label for="correo" class="form-label">Correo o nombre de Usuario</label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="text" id="correo" name="correo" class="form-control" placeholder="Ingresa tu correo o usuario" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="contrasena" class="form-label">Contraseña</label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                        </div>
+                                    </div>
+                                    @if (TempData["error"] != null)
+                                    {
+                                        <div class="alert alert-danger" role="alert">
+                                            @TempData["error"]
+                                        </div>
+                                    }
+                                </div>
+                                <div class="container pt-2">
+                                    <div class="d-grid mb-0 text-center">
+                                        <input style="background-color:#9f2241;border-color:#9f2241;" id="entrar" type="submit"
+                                               class="btn btn-red degradado text-white" value="Iniciar Sesión"/>
+                                    </div>
+                                </div>
+                                <div class="container pt-2">
+                                    <div class="mb-2">
+                                        <a href="~/Auth/Registro" class="text-primary text-decoration-underline">Registrarse</a>
+                                    </div>
+                                    <div class="mb-2">
+                                        <a href="~/Auth/Recuperar" class="text-success text-decoration-underline">¿Olvidaste tu contraseña?</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/login/scripts.js"></script>
+    <script src="~/login/particles.js"></script>
+    <script src="~/login/app.js"></script>
+
+</body>
+</html>
