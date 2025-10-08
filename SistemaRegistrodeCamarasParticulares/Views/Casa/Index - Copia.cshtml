@@ -1,0 +1,119 @@
+﻿@model IEnumerable<SistemaRegistrodeCamarasParticulares.Models.Casa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Municipio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colonia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CallePrincipal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalleSecundaria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalleTercera)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoPostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroExterior)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroInterior)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeletedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Municipio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Colonia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CallePrincipal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalleSecundaria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalleTercera)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoPostal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroExterior)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroInterior)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

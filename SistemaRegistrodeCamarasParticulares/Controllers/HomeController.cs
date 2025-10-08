@@ -28,5 +28,23 @@ namespace SistemaRegistrodeCamarasParticulares.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        //[HttpPost]
+        //public JsonResult recaptcha(string token)
+        //{
+        //    string secretKey = "6LfDtSgrAAAAAFUusogQ4XGb1PdIX-YWhF0pE2Ph";
+        //    string url = $"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={token}";
+        //    var response = new System.Net.WebClient().DownloadString(url);
+        //    var responseKeys = System.Text.Json.JsonDocument.Parse(response).RootElement;
+        //    bool success = responseKeys.GetProperty("success").GetBoolean();
+        //    if(success)
+        //    {
+        //        return Json(new { success = true, message = "Captcha verificado con éxito." });
+        //    }
+        //    else
+        //    {
+        //        return Json(new { success = false, message = "Error al verificar el captcha." });
+        //    }
+        //}
     }
 }

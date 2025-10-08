@@ -9,6 +9,8 @@ public partial class Casa
 
     public long? IdUsuario { get; set; }
 
+    public string? TipoCasa { get; set; }
+
     public string? Descripcion { get; set; }
 
     public string? Municipio { get; set; }
@@ -26,6 +28,14 @@ public partial class Casa
     public string? NumeroExterior { get; set; }
 
     public string? NumeroInterior { get; set; }
+
+    public int? NumCamsFijas { get; set; }
+
+    public int? NumCamsMoviles { get; set; }
+
+    public string? Componentes { get; set; }
+
+    public string? TiempoGrabacion { get; set; }
 
     public string? Latitud { get; set; }
 

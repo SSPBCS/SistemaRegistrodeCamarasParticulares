@@ -1,0 +1,304 @@
+﻿@model SistemaRegistrodeCamarasParticulares.Models.Casa
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <style>
+        .reCAPTCHA {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            z-index: 1000;
+        }
+    </style>
+}
+
+<h1>Agregar Casa</h1>
+<hr />
+<div class="mt-2">
+
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-8 col-xl-8">
+                    <div class="card">
+                        <div class="card-header" style="background-color: #611232; min-height: 100px">
+                            <div class="text-center w-75 m-auto">
+                                <div class="d-flex flex-column align-items-center justify-content-center ">
+                                    <h4 class="mt-4" style="color:white"><B>Datos de la Casa</B></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-4 bg-light">
+                            <form asp-controller="Casa" asp-action="Create" method="post" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label asp-for="Descripcion" class="control-label">Descripción <small class="text-danger">* Obligatorio</small></label>
+                                        <input asp-for="Descripcion" class="form-control" placeholder="Ej. Casa de dos pisos, Departamento, etc." required />
+                                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label asp-for="TipoCasa" class="control-label">Tipo de Casa <small class="text-danger">* </small></label>
+                                        <input asp-for="TipoCasa" class="form-control" required placeholder="Ej. Propia, Rentada, Prestada, etc"/>
+                                        <span asp-validation-for="TipoCasa" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 form-group">
+                                        <label asp-for="Municipio" class="control-label">Municipio <small class="text-danger">* </small></label>
+                                        <select asp-for="Municipio" class="form-control" asp-items="ViewBag.Municipio" required>
+                                            <option value="" disabled selected>Selecciona tu municipio</option>
+                                            <option value="La Paz">La Paz</option>
+                                            <option value="Los Cabos">Los Cabos</option>
+                                            <option value="Comondú">Comondú</option>
+                                            <option value="Loreto">Loreto</option>
+                                            <option value="Mulegé">Mulegé</option>
+                                        </select>
+                                        <span asp-validation-for="Municipio" class="text-danger"></span>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label asp-for="Colonia" class="control-label">Colonia <small class="text-danger">* </small></label>
+                                        <input asp-for="Colonia" class="form-control" required placeholder="Ingrese su colonia"/>
+                                        <span asp-validation-for="Colonia" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 form-group">
+                                        <label asp-for="CodigoPostal" class="control-label">Codigo Postal <small class="text-danger">* </small></label>
+                                        <input type="number" asp-for="CodigoPostal" class="form-control" required placeholder="Ej. 23000"/>
+                                        <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label asp-for="CallePrincipal" class="control-label">Calle Principal <small class="text-danger">* </small> </label>
+                                        <input asp-for="CallePrincipal" class="form-control" required placeholder="Ingrese su calle principal"/>
+                                        <span asp-validation-for="CallePrincipal" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label asp-for="CalleSecundaria" class="control-label">Entre Calle <small class="text-danger">* </small></label>
+                                        <input asp-for="CalleSecundaria" class="form-control" required placeholder="Ej. Calle Calafia"/>
+                                        <span asp-validation-for="CalleSecundaria" class="text-danger"></span>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label asp-for="CalleTercera" class="control-label">Y calle</label>
+                                        <input asp-for="CalleTercera" class="form-control" placeholder="Ej. Calle Calafia" />
+                                        <span asp-validation-for="CalleTercera" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label asp-for="NumeroExterior" class="control-label">Número Exterior <small class="text-danger">* </small></label>
+                                        <input type="number" asp-for="NumeroExterior" class="form-control" required placeholder="Ej. Calle Calafia" />
+                                        <span asp-validation-for="NumeroExterior" class="text-danger"></span>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label asp-for="NumeroInterior" class="control-label">Numero Interior</label>
+                                        <input type="number" asp-for="NumeroInterior" class="form-control" placeholder="Ej. 178, SN" />
+                                        <span asp-validation-for="NumeroInterior" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div id="map" style="height: 450px; width: 100%;"></div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                <h5 class="control-label">Datos de las camaras en la Vivienda</h5>
+                                    <div class="col form-group">
+                                        <label asp-for="NumCamsFijas" class="control-label">Número de Camaras Fijas <small class="text-danger">* </small></label>
+                                        <input type="number" asp-for="NumCamsFijas" class="form-control" required placeholder="Ej. 3" />
+                                        <span asp-validation-for="NumCamsFijas" class="text-danger"></span>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label asp-for="NumCamsMoviles" class="control-label">Número de Camaras Moviles <small class="text-danger">* </small></label>
+                                        <input type="number" asp-for="NumCamsMoviles" class="form-control" required placeholder="Ej. 5" />
+                                        <span asp-validation-for="NumCamsMoviles" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label asp-for="Componentes" class="control-label">Componentes <small class="text-danger">* </small></label>
+                                        <textarea asp-for="Componentes" class="form-control" required placeholder="Ej. Texto"></textarea>
+                                        <span asp-validation-for="Componentes" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label asp-for="TiempoGrabacion" class="control-label">Tiempo de Grabación <small class="text-danger">* </small></label>
+                                        <input asp-for="TiempoGrabacion" class="form-control" required placeholder="Ej. Borrado de video diario, semanal, mensual, etc." />
+                                        <span asp-validation-for="TiempoGrabacion" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <h5 class="control-label">Documento de la Vivienda</h5>
+                                    <div class="col form-group">
+                                        <label class="control-label">Comprobante de Domicilio <small class="text-danger">* </small></label>
+                                        <div id="dropzone" class="dropzone" name="archivos">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" asp-for="IdUsuario" class="form-control" value="@User.FindFirst("Id")?.Value" />
+                                    <input type="hidden" asp-for="Latitud" id="Latitud" class="form-control" value="24.138026" />
+                                    <input type="hidden" asp-for="Longitud" id="Longitud" class="form-control" value="-110.314285" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" value="Crear" 
+                                        @* data-sitekey="6Ld0IyorAAAAAPBWz6GATbvdsXAkiQB7Iou6KiUD"
+                                        data-callback='onSubmit'
+                                        data-action='submit' *@
+                                        class="btn btn-success g-recaptcha">
+                                        Guardar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <div class="account-pages mt-5 mb-5" >
+        <div class="container">
+            <div class="card col-md-6">
+                <div class="card-header">
+                    <h4>Datos de la Casa</h4>
+                </div>
+                <div class="card-body pb-1">
+                    <div class="">
+                        <div class="">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> *@
+
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+<div class="reCAPTCHA" id="reCAPTCHA">
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Ld0IyorAAAAAPBWz6GATbvdsXAkiQB7Iou6KiUD"></script>
+    <script>
+        function onSubmit(token) {
+            console.log(token);
+            $.ajax({
+                url: '@Url.Action("recaptcha", "Home")',
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    token: token
+                },
+                success: function(response) {
+                    
+                    if (response.success) {
+                        enviarDenuncia();
+                    } else {
+                        alert('Error en la verificación de reCAPTCHA. Inténtalo de nuevo.');
+                    }
+                },
+            })
+        }
+    </script>
+    <script>
+        function loadGoogleMapsAPI(callback) {
+            const script = document.createElement("script");
+            script.src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Rht8_MJwJrZb_5LQOvlhf7DjzOtRjtA&callback=initMap&libraries=marker&v=weekly";
+            script.async = true;
+            document.head.appendChild(script);
+        }
+
+        async function initMap() {
+                 const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+            const map = new Map(document.getElementById('map'), {
+                center: { lat: 24.138026, lng: -110.314285 },
+                zoom: 14,
+                mapId: '4504f8b37365c3d0',
+            });
+            const infoWindow = new InfoWindow();
+            const draggableMarker = new AdvancedMarkerElement({
+                map,
+                position: { lat: 24.138026, lng: -110.314285 },
+                gmpDraggable: true,
+                title: "This marker is draggable.",
+            });
+            draggableMarker.addListener('dragend', (event) => {
+                const position = draggableMarker.position;
+                $('#Latitud').val(position.lat);
+                $('#Longitud').val(position.lng);
+                // infoWindow.close();
+                // infoWindow.setContent(`Pin dropped at: ${position.lat}, ${position.lng}`);
+                // infoWindow.open(draggableMarker.map, draggableMarker);
+            });
+        }
+
+        loadGoogleMapsAPI("initMap");
+
+    </script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <script>
+        var contadorFotos = 1;
+        var myDropzone = new Dropzone("#dropzone", {
+            url: '@Url.Action("Upload", "Documento")',
+            Headers: {
+                'X-CSRF-TOKEN': $('input[name="__RequestVerificationToken"]').val()
+            },
+            paramName: "archivos",
+            maxfilesize: 2,
+            maxFiles: 1,
+            resizeQuality: 0.5,
+            acceptedFiles: ".pdf",
+            addRemoveLinks: true,
+            dictDefaultMessage: "Arrastra y suelta archivos aquí o haz clic para subir",
+            dicFallbackMessage: "Tu navegador no soporta la subida de archivos por arrastre y suelta.",
+            dicFileTooBig: "El archivo es demasiado grande. Tamaño máximo: 2 MB.",
+            dicInvalidFileType: "Solo puedes subir archivos de tipo .pdf.",
+            dicMaxFilesExceeded: "Solo puedes subir un máximo de 1 archivos.",
+            init: function() {
+                this.on("removedfile", function(file) {
+                    $('#dropzone').find('input[value="' + file.upload.name + '"]').remove();
+                });
+            },
+            maxfilesexceeded: function(file) {
+                this.removeFile(file);
+                Swal.fire({
+                    title: "¡Error!",
+                    text: "Solo puedes subir un máximo de 1 archivos.",
+                    icon: "error",
+                    confirmButtonText: "Aceptar",
+                });
+            },
+            success: function(file, response) {
+                file.previewElement.classList.add("dz-success");
+                file.upload.name = response.path;
+                $("#dropzone").append('<input type="hidden" name="archivos" id="archivos" value="' + response.path + '">');
+                contadorFotos++;
+            },
+            error: function(file, response) {
+                Swal.fire({
+                    title: "¡Error!",
+                    text: "Error al subir el archivo, el archivo no es valido",
+                    icon: "error",
+                    confirmButtonText: "Aceptar",
+                });
+                this.removeFile(file);
+            },
+        });
+    </script>
+}

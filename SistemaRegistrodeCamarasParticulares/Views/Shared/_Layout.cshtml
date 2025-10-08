@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@ViewData["Title"] - Sistema Chips Repuve</title>
+    <title>@ViewData["Title"] - Sistema Estatal de Video Vigilancia para Particulares</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
           name="viewport" />
     <link rel="icon"
@@ -80,11 +80,11 @@
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                             </span>
-                            <h5 class="text-section" style="color: #a57f2c">Sistema Estatal de Video Vigilancia para Particulares</h5>
+                            <h5 class="text-section" style="color: white">Sistema Estatal de Video Vigilancia para Particulares</h5>
                         </li>
                         <li class="mt-4">
                             <a href="@Url.Action("Index", "Casa")">
-                                <span class="sub-item">Home</span>
+                                <span class="sub-item">Casas</span>
                             </a>
                         </li>
                         @if (User.IsInRole("SuperAdmin") || User.IsInRole("Administrador"))
@@ -123,10 +123,11 @@
                 <!-- Navbar Header -->
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
+                        <h6 class="text" style="color: white">SECRETARÍA DE SEGURIDAD PÚBLICA DE BAJA CALIFORNIA SUR</h6>
+
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                             @if (User.Identity.IsAuthenticated)
                             {
-                            }
                                 <li class="nav-item topbar-user dropdown hidden-caret">
                                     <a class="dropdown-toggle profile-pic"
                                        data-bs-toggle="dropdown"
@@ -161,11 +162,12 @@
                                                 <div class="dropdown-divider"></div>
                                                 @* <a class="dropdown-item" asp-controller="Home" asp-action="GenerarExcel">Generar Reporte de Usuario</a> *@
                                                 @* <div class="dropdown-divider"></div> *@
-                                                <a class="dropdown-item" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
+                                                <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Cerrar sesión</a>
                                             </li>
                                         </div>
                                     </ul>
                                 </li>
+                            }
                         </ul>
                     </div>
                 </nav>
@@ -202,8 +204,8 @@
                 <nav class="pull-left">
                 </nav>
                 <div class="copyright">
-                    2025, Sistema de Arcos
-                    <a href="https://sspbcs.gob.mx/ssp/direccion-del-registro-publico-vehicular/">REPUVE</a>
+                    2025, Sistema Estatal de Video Vigilancia para Particulares
+                    <a href="https://sspbcs.gob.mx/ssp/">SSP</a>
                 </div>
                 <div>
                 </div>

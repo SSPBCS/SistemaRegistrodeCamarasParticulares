@@ -30,7 +30,7 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
     {
         modelBuilder.Entity<Camara>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CAMARAS__3214EC07D872CBA5");
+            entity.HasKey(e => e.Id).HasName("PK__CAMARAS__3214EC078B1D2180");
 
             entity.ToTable("CAMARAS");
 
@@ -67,7 +67,7 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
 
         modelBuilder.Entity<Casa>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__CASAS__3214EC070DB172C3");
+            entity.HasKey(e => e.Id).HasName("PK__CASAS__3214EC0727EFEA7A");
 
             entity.ToTable("CASAS");
 
@@ -86,6 +86,7 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
             entity.Property(e => e.Colonia)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.Componentes).IsUnicode(false);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.DeletedAt).HasColumnType("datetime");
             entity.Property(e => e.Descripcion)
@@ -106,6 +107,12 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
             entity.Property(e => e.NumeroInterior)
                 .HasMaxLength(10)
                 .IsUnicode(false);
+            entity.Property(e => e.TiempoGrabacion)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.TipoCasa)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Casas)
@@ -115,7 +122,7 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
 
         modelBuilder.Entity<Documento>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DOCUMENT__3214EC07F6884913");
+            entity.HasKey(e => e.Id).HasName("PK__DOCUMENT__3214EC07A7D0B5D4");
 
             entity.ToTable("DOCUMENTOS");
 
@@ -142,7 +149,7 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
 
         modelBuilder.Entity<Log>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__LOGS__3214EC0766C23BFC");
+            entity.HasKey(e => e.Id).HasName("PK__LOGS__3214EC07FC70BFB0");
 
             entity.ToTable("LOGS");
 
@@ -170,7 +177,7 @@ public partial class DbRegistroCamarasParticularesContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__USUARIOS__3214EC0799AF01DB");
+            entity.HasKey(e => e.Id).HasName("PK__USUARIOS__3214EC07CF37AC29");
 
             entity.ToTable("USUARIOS");
 
