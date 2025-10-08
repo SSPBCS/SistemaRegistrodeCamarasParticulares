@@ -122,11 +122,34 @@
             </div>
         </div>
     </div>
+    <div class="reCAPTCHA" id="reCAPTCHA">
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/login/scripts.js"></script>
     <script src="~/login/particles.js"></script>
     <script src="~/login/app.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Ld0IyorAAAAAPBWz6GATbvdsXAkiQB7Iou6KiUD"></script>
+    <script>
+        function onSubmit(token) {
+            console.log(token);
+            $.ajax({
+                url: '@Url.Action("recaptcha", "Home")',
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    token: token
+                },
+                success: function(response) {
 
+                    if (response.success) {
+                        enviarDenuncia();
+                    } else {
+                        alert('Error en la verificación de reCAPTCHA. Inténtalo de nuevo.');
+                    }
+                },
+            })
+        }
+    </script>
 </body>
 </html>

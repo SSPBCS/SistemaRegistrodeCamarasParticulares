@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SistemaRegistrodeCamarasParticulares.Context;
 
@@ -8,6 +9,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DbRegistroCamarasParticularesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbRegistroCamarasParticulares") ?? throw new InvalidOperationException("Connection string 'DbRegistroCamarasParticulares' not found.")));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(40);
+        options.LogoutPath = "/Auth/Logout";
+        options.AccessDeniedPath = "/Home/Privacy";
+    });
 
 var app = builder.Build();
 
@@ -23,6 +33,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
